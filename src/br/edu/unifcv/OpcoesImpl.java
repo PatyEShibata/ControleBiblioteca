@@ -12,28 +12,29 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("========================================");
 		System.out.println("========        CADASTRAR       ========");
 		System.out.println("========================================");
-		Livro novoLivro = new Livro();
 		System.out.println("Digite o nome do Livro:");
-		Scanner nome = new Scanner(System.in);
-		novoLivro.setNome(nome.nextLine());
-
+		Scanner scan= new Scanner(System.in);
+		String nome = scan.nextLine();
+		
 		for (Livro livro : this.getLivros()) {
-			if (livro.getNome().equalsIgnoreCase(novoLivro.getNome())) {
+			if (livro.getNome().equalsIgnoreCase(nome)) {
 				System.out.println("Erro: livro ja cadastrado.");
 				this.cadastrar();
 				return;
 			}
 		}
 
+		Livro novoLivro = new Livro();
+		novoLivro.setNome(nome);
 		System.out.println("Digite o autor do Livro:");
 		Scanner autor = new Scanner(System.in);
-		novoLivro.setAutor(autor.nextLine());
+		String nomeAutor = autor.nextLine();
 		System.out.println("Digite a descrição do Livro:");
 		Scanner descricao = new Scanner(System.in);
-		novoLivro.setDescricao(descricao.nextLine());
+		String descricaoLivro = descricao.nextLine();
 		System.out.println("Digite a data de lançamento do Livro:");
 		Scanner dataLancamento = new Scanner(System.in);
-		novoLivro.setDataLancamento(dataLancamento.nextLine());
+		String dataLancamentoLivro = dataLancamento.nextLine();
 
 		this.getLivros().add(novoLivro);
 
@@ -72,8 +73,12 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		String nome = scanner.nextLine();
 
 		for (Livro livro : this.getLivros()) {
-			if (livro.getNome().equalsIgnoreCase(nome) && !livro.isAlugado()) {
-				livro.setAlugado(true);
+			if (livro.getNome().equalsIgnoreCase(nome)) {
+				if (!livro.isAlugado()) {					
+					livro.setAlugado(true);
+				} else {
+					System.out.println("Erro: o livro está alugado.");
+				}
 			}
 		}
 		this.showMenu();
