@@ -20,7 +20,7 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		for (Livro livro : this.getLivros()) {
 			if (livro.getNome().equalsIgnoreCase(novoLivro.getNome())) {
 				System.out.println("Erro: livro ja cadastrado.");
-				this.showMenu();
+				this.cadastrar();
 				return;
 			}
 		}
@@ -49,8 +49,15 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("Digite o nome do Livro:");
 		Scanner scanner = new Scanner(System.in);
 		String nome = scanner.nextLine();
-
-		this.getLivros().removeIf(livro -> livro.getNome().equals(nome));
+		
+		for (Livro livro : this.getLivros()) {
+			if (livro.getNome().equalsIgnoreCase(nome) && livro.isAlugado()){
+			System.out.println("Erro: livro alugado.");
+			this.excluir();
+			}
+		}
+		
+		this.getLivros().removeIf(livro -> livro.getNome().equals(nome) && !livro.isAlugado());
 		this.showMenu();
 	}
 
@@ -175,6 +182,10 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 			this.livrosOrdenados();
 		case "8":
 			this.sair();
+			break;
+		default:
+			System.out.println("Erro: essa opcao eh invalida.");
+			this.showMenu();
 		}
 
 	}
