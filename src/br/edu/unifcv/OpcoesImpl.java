@@ -131,7 +131,7 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("========================================");
 		for (Livro livro : this.getLivros()) {
 			if (livro.isAlugado()) {
-				System.out.println(livro.getNome());
+				System.out.println(livro.toString());
 			}
 		}
 
