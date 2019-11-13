@@ -3,7 +3,6 @@ package br.edu.unifcv;
 import java.util.Comparator;
 import java.util.Scanner;
 
-
 public class OpcoesImpl extends Biblioteca implements Opcoes {
 
 	@Override
@@ -13,9 +12,9 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("========        CADASTRAR       ========");
 		System.out.println("========================================");
 		System.out.println("Digite o nome do Livro:");
-		Scanner scan= new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		String nome = scan.nextLine();
-		
+
 		for (Livro livro : this.getLivros()) {
 			if (livro.getNome().equalsIgnoreCase(nome)) {
 				System.out.println("Erro: livro ja cadastrado.");
@@ -29,12 +28,15 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("Digite o autor do Livro:");
 		Scanner autor = new Scanner(System.in);
 		String nomeAutor = autor.nextLine();
+		novoLivro.setAutor(nomeAutor);
 		System.out.println("Digite a descrição do Livro:");
 		Scanner descricao = new Scanner(System.in);
 		String descricaoLivro = descricao.nextLine();
+		novoLivro.setDescricao(descricaoLivro);
 		System.out.println("Digite a data de lançamento do Livro:");
 		Scanner dataLancamento = new Scanner(System.in);
 		String dataLancamentoLivro = dataLancamento.nextLine();
+		novoLivro.setDataLancamento(dataLancamentoLivro);
 
 		this.getLivros().add(novoLivro);
 
@@ -50,14 +52,14 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("Digite o nome do Livro:");
 		Scanner scanner = new Scanner(System.in);
 		String nome = scanner.nextLine();
-		
+
 		for (Livro livro : this.getLivros()) {
-			if (livro.getNome().equalsIgnoreCase(nome) && livro.isAlugado()){
-			System.out.println("Erro: livro alugado.");
-			this.excluir();
+			if (livro.getNome().equalsIgnoreCase(nome) && livro.isAlugado()) {
+				System.out.println("Erro: livro alugado.");
+				this.excluir();
 			}
 		}
-		
+
 		this.getLivros().removeIf(livro -> livro.getNome().equals(nome) && !livro.isAlugado());
 		this.showMenu();
 	}
@@ -74,7 +76,7 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 
 		for (Livro livro : this.getLivros()) {
 			if (livro.getNome().equalsIgnoreCase(nome)) {
-				if (!livro.isAlugado()) {					
+				if (!livro.isAlugado()) {
 					livro.setAlugado(true);
 				} else {
 					System.out.println("Erro: o livro está alugado.");
@@ -93,12 +95,19 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("Digite o nome do Livro:");
 		Scanner scanner = new Scanner(System.in);
 		String nome = scanner.nextLine();
-
+		boolean isExists = false;
 		for (Livro livro : this.getLivros()) {
-			if (livro.getNome().equalsIgnoreCase(nome)) {
+			if (livro.getNome().equalsIgnoreCase(nome) && (livro.isAlugado())) {
 				livro.setAlugado(false);
+				isExists = true;
+				break;
 			}
 		}
+
+		if (!isExists) {
+			System.out.println("Erro: o livro não encontrado.");
+		}
+
 		this.showMenu();
 	}
 
@@ -109,7 +118,7 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		System.out.println("========================================");
 		for (Livro livro : this.getLivros()) {
 			if (!livro.isAlugado()) {
-				System.out.println(livro.getNome());
+				System.out.println(livro.toString());
 			}
 		}
 		this.showMenu();

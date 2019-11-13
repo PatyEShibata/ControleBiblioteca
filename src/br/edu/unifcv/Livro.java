@@ -38,7 +38,10 @@ public class Livro {
 	public void setAlugado(boolean alugado) {
 		this.alugado = alugado;
 	}
-	
+	@Override
+	public String toString() {
+		return "Nome: " + nome + "\n"+ "Descrição: " + descricao + "\n" + "Autor: " + autor + "\n" + "Data Lançamento: " + dataLancamento +"\n" + "----------------";
+	}
 	
 	
 	

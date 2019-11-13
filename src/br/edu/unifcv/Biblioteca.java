@@ -3,7 +3,7 @@ package br.edu.unifcv;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Biblioteca {
+public abstract class Biblioteca {
 
 	private List<Livro> livros = new ArrayList<>();
 
