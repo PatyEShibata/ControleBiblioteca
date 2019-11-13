@@ -105,7 +105,7 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		}
 
 		if (!isExists) {
-			System.out.println("Erro: o livro não encontrado.");
+			System.out.println("Erro: livro não encontrado.");
 		}
 
 		this.showMenu();
@@ -148,7 +148,7 @@ public class OpcoesImpl extends Biblioteca implements Opcoes {
 		this.getLivros().sort(comparador);
 
 		for (Livro livro : this.getLivros()) {
-			System.out.println(livro.getNome());
+			System.out.println(livro.toString());
 		}
 		this.showMenu();
 	}
